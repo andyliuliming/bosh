@@ -24,6 +24,9 @@ Sequel.migration do
     end
 
     alter_table(:instances) do
+      if Sequel::Model.db.database_type == :mssql
+        drop_constraint :uq_instances_disk_cid, :type=>:unique
+      end
       drop_column :disk_cid
       drop_column :disk_size
     end

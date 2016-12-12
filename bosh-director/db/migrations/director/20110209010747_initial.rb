@@ -73,7 +73,11 @@ Sequel.migration do
       primary_key :id
       String :job, :null => false
       Integer :index, :unsigned => true, :null => false
-      String :disk_cid, :unique => true, :null => true
+      if Sequel::Model.db.database_type == :mssql
+        String :disk_cid, :unique => true, :null => true, :unique_constraint_name => 'uq_instances_disk_cid'
+      else
+        String :disk_cid, :unique => true, :null => true
+      end
       foreign_key :deployment_id, :deployments, :null => false
       foreign_key :vm_id, :vms, :unique => true, :null => true
     end

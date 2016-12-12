@@ -3,7 +3,11 @@ Sequel.migration do
     rename_table(:director_attributes, :old_director_attributes)
 
     create_table(:director_attributes) do
-      String :name, unique: true, null: false, primary_key: true
+      if Sequel::Model.db.database_type == :mssql
+        String :name, null: false, primary_key: true
+      else
+        String :name, unique: true, null: false, primary_key: true
+      end
       String :value
     end
 
