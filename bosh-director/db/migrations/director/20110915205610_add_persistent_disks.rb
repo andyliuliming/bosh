@@ -7,7 +7,7 @@ Sequel.migration do
       foreign_key :instance_id, :instances, :null => false
       String :disk_cid, :unique => true, :null => false
       Integer :size
-      Boolean :active, :default => false
+      TrueClass :active, :default => false
     end
 
     self[:instances].each do |instance|
@@ -24,6 +24,9 @@ Sequel.migration do
     end
 
     alter_table(:instances) do
+      if Sequel::Model.db.database_type == :mssql
+        drop_constraint :uq_instances_disk_cid, :type=>:unique
+      end
       drop_column :disk_cid
       drop_column :disk_size
     end

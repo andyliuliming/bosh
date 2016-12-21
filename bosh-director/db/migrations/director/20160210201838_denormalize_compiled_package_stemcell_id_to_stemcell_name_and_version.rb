@@ -17,7 +17,7 @@ Sequel.migration do
       )
     end
 
-    if [:mysql2, :mysql, :postgres].include?(adapter_scheme)
+    if [:mysql2, :mysql, :postgres].include?(adapter_scheme) || Sequel::Model.db.database_type == :mssql
       stemcell_foreign_keys = foreign_key_list(:compiled_packages).select { |constraint| constraint.fetch(:columns).include?(:stemcell_id) }
       raise 'Failed to run migration, found more than 1 stemcell foreign key' if stemcell_foreign_keys.size != 1
       stemcell_foreign_key_name = stemcell_foreign_keys.first.fetch(:name)
@@ -30,7 +30,7 @@ Sequel.migration do
         alter_table(:compiled_packages) do
           drop_index(nil, name: build_index)
         end
-      elsif [:postgres].include?(adapter_scheme)
+      elsif [:postgres].include?(adapter_scheme) || Sequel::Model.db.database_type == :mssql
         build_index = build_indexes.empty? ? 'compiled_packages_package_id_stemcell_id_build_key' : build_indexes.first.first
         alter_table(:compiled_packages) do
           drop_constraint(build_index)

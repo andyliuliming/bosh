@@ -331,6 +331,8 @@ GEM
     thread_safe (0.3.5)
     tilt (1.4.1)
     timecop (0.7.3)
+    tiny_tds (1.0.5)
+      mini_portile2 (~> 2.0)
     trollop (1.16.2)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -388,6 +390,7 @@ DEPENDENCIES
   sqlite3
   talentbox-delayed_job_sequel (~> 4.1)
   timecop (~> 0.7.1)
+  tiny_tds (~> 1.0.5)
   unix-crypt
   vcr
   webmock

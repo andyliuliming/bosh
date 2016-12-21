@@ -1,7 +1,11 @@
 Sequel.migration do
   up do
     create_table(:director_attributes) do
-      String :uuid, unique: true, null: false, primary_key: true
+      if Sequel::Model.db.database_type == :mssql
+        String :uuid, null: false, primary_key: true
+      else
+        String :uuid, unique: true, null: false, primary_key: true
+      end
     end
   end
 
