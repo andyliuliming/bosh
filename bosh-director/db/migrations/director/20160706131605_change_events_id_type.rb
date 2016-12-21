@@ -2,21 +2,15 @@ Sequel.migration do
   change do
     if [:mssql].include?(database_type)
         run <<-SQL
-          declare @schema_name nvarchar(256)
-          declare @table_name nvarchar(256)
-          declare @col_name nvarchar(256)
-          declare @Command  nvarchar(1000)
-          set @table_name = N'events'
-          set @col_name = N'id'
-          select @Command = 'ALTER TABLE ' + '' + @table_name + ' drop constraint ' + d.name
-          from sys.tables t
-              join sys.key_constraints d
-              on d.parent_object_id = t.object_id
-              join sys.columns c
-              on c.object_id = t.object_id
-          where t.name = @table_name and c.name = @col_name and d.type = 'PK'
+          DECLARE @table NVARCHAR(512), @dropconstraintsql NVARCHAR(MAX);
+          SELECT @table = N'events';
+          SELECT @dropconstraintsql = 'ALTER TABLE ' + @table
+              + ' DROP CONSTRAINT ' + name + ';'
+              FROM sys.key_constraints
+              WHERE [type] = 'PK'
+              AND [parent_object_id] = OBJECT_ID(@table);
 
-          execute (@Command)
+          EXEC sp_executeSQL @dropconstraintsql
           SQL
         alter_table :events do
           set_column_type :id, Bignum
