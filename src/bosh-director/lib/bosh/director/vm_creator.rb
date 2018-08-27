@@ -25,7 +25,8 @@ module Bosh::Director
 
         agendas << get_agenda_for_instance_plan(instance_plan, disks, tags, ip_provider, total)
       end
-
+      # TODO: checking the agendas, and check whether they can be mereged into batch operations.
+      
       StepExecutor.new('Creating missing vms', agendas).run
     end
 
