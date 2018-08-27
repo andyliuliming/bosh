@@ -15,6 +15,7 @@ module Bosh
           network_planner = NetworkPlanner::Planner.new(@logger)
           placement_plan = PlacementPlanner::Plan.new(@instance_plan_factory, network_planner, @logger)
           vip_networks, non_vip_networks = instance_group.networks.to_a.partition(&:vip?)
+          # TODO: here.
           instance_plans = placement_plan.create_instance_plans(desired_instances, existing_instance_models, non_vip_networks, instance_group.availability_zones, instance_group.name)
 
           log_outcome(instance_plans)
