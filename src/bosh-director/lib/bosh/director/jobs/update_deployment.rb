@@ -86,7 +86,7 @@ module Bosh::Director
 
             deployment_assembler = DeploymentPlan::Assembler.create(deployment_plan)
             dns_encoder = LocalDnsEncoderManager.new_encoder_with_updated_index(deployment_plan)
-
+            # TODO: here.
             # that's where the links resolver is created
             deployment_assembler.bind_models({is_deploy_action: is_deploy_action, should_bind_new_variable_set: is_deploy_action})
           end
