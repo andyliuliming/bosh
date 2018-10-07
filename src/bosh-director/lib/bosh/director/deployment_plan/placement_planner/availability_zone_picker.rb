@@ -16,7 +16,7 @@ module Bosh
           def place_and_match_in(desired_instances, existing_instance_models)
             validate_networks_not_changed_for_ignore_vms(existing_instance_models)
 
-            unplaced_existing_instances =  UnplacedExistingInstances.new(existing_instance_models)
+            unplaced_existing_instances = UnplacedExistingInstances.new(existing_instance_models)
             desired_azs_sorted = unplaced_existing_instances.azs_sorted_by_existing_instance_count_descending(@desired_azs)
             @logger.debug("Desired azs: #{desired_azs_sorted.inspect}")
             validate_desired_azs_contains_all_azs_from_ignored_instances(unplaced_existing_instances, desired_instances)

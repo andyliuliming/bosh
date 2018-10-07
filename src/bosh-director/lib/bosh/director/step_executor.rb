@@ -13,6 +13,7 @@ module Bosh::Director
       end
 
       ThreadPool.new(max_threads: Config.max_threads).wrap do |pool|
+        # if batch processing enabled. create the vms
         @agendas.each do |agenda|
           pool.process do
             with_thread_name(agenda.thread_name) do
