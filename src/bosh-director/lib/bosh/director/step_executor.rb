@@ -16,6 +16,9 @@ module Bosh::Director
         # if batch processing enabled. create the vms
         new_agendas = []
 
+        # grab all the Create VM Steps in the agendas.
+        # and put it into a batch creating step.
+        # then execute them.
         # execute the create vm operations.
         @agendas.each do |agenda|
           # push the processed one into the queue.

@@ -131,6 +131,7 @@ module Bosh::Director
           count = 0
           begin
             cloud = cloud_factory.get(vm_options[:cpi], stemcell_api_version)
+            # defer this?
             vm_cid = cloud.create_vm(agent_id, stemcell_cid, cloud_properties, network_settings, disks, env)
           rescue Bosh::Clouds::VMCreationFailed => e
             count += 1

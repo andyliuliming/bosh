@@ -25,9 +25,6 @@ module Bosh::Director
 
         agendas << get_agenda_for_instance_plan(instance_plan, disks, tags, ip_provider, total)
       end
-      # grab all the Create VM Steps in the agendas.
-      # and put it into a batch creating step.
-      # then execute them.
       StepExecutor.new('Creating missing vms', agendas).run
     end
 
