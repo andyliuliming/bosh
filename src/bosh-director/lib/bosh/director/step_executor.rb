@@ -14,6 +14,14 @@ module Bosh::Director
 
       ThreadPool.new(max_threads: Config.max_threads).wrap do |pool|
         # if batch processing enabled. create the vms
+        new_agendas = []
+
+        # execute the create vm operations.
+        @agendas.each do |agenda|
+          # push the processed one into the queue.
+        end
+
+        # wait for the items popped from the queue 
         @agendas.each do |agenda|
           pool.process do
             with_thread_name(agenda.thread_name) do

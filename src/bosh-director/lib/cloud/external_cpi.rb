@@ -54,6 +54,13 @@ module Bosh::Clouds
     def create_stemcell(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
     def delete_stemcell(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
     def create_vm(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
+    ##
+    # Returns a.
+    #
+    # @param Array of arguments to create vms.
+    #
+    # @return [Hash] vm_cid of the vms created.
+    #
     def create_vms(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
     def delete_vm(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
     def create_network(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
