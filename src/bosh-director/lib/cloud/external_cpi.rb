@@ -84,6 +84,12 @@ module Bosh::Clouds
 
     private
 
+    def invoke_cpi_method_inner(method_name, streaming,  *arguments)
+      if streaming
+      else
+      end
+    end
+
     def invoke_cpi_method(method_name, *arguments)
       request_id = "cpi-#{Random.rand(100000..999999)}"
       context = {
@@ -118,6 +124,9 @@ module Bosh::Clouds
       end
 
       parsed_response['result']
+    end
+
+    def invoke_cpi_method_streaming(method_name, *arguments)
     end
 
     def checked_cpi_exec_path
