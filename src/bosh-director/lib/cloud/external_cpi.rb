@@ -53,7 +53,11 @@ module Bosh::Clouds
     def current_vm_id(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
     def create_stemcell(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
     def delete_stemcell(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
-    def create_vm(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
+    def create_vm(*arguments)
+      if true
+        invoke_cpi_method(__method__.to_s, *arguments)
+      end
+    end
     ##
     # Returns a.
     #
@@ -61,7 +65,7 @@ module Bosh::Clouds
     #
     # @return [Hash] vm_cid of the vms created.
     #
-    def create_vms(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
+    # def create_vms(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
     def delete_vm(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
     def create_network(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
     def delete_network(*arguments); invoke_cpi_method(__method__.to_s, *arguments); end
@@ -84,11 +88,16 @@ module Bosh::Clouds
 
     private
 
-    def invoke_cpi_method_inner(method_name, streaming,  *arguments)
-      if streaming
-      else
-      end
-    end
+    # def invoke_cpi_method_inner(method_name, streaming, *arguments)
+    #   if streaming
+    #     Open3.popen3([env,] cmd... [, opts]) {|stdin, stdout, stderr, wait_thr|
+    #       pid = wait_thr.pid # pid of the started process.
+    #       ...
+    #       exit_status = wait_thr.value # Process::Status object returned.
+    #     }
+    #   else
+    #   end
+    # end
 
     def invoke_cpi_method(method_name, *arguments)
       request_id = "cpi-#{Random.rand(100000..999999)}"

@@ -12,6 +12,7 @@ module Bosh::Director
           @tags = tags
           @logger = Config.logger
           @vm_deleter = VmDeleter.new(@logger, false, Config.enable_virtual_delete_vms)
+          
         end
 
         def perform(report)

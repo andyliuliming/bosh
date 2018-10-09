@@ -1,4 +1,11 @@
 module Bosh::Director
+  class BatchAgenda
+    attr_reader :slots
+    def initialize(slots)
+      @slots = slots
+    end
+  end
+
   class StepExecutor
     def initialize(stage_name, agendas, track: true)
       @stage_name = stage_name
@@ -23,6 +30,10 @@ module Bosh::Director
         @agendas.each do |agenda|
           # push the processed one into the queue.
         end
+
+        
+
+
 
         # wait for the items popped from the queue 
         @agendas.each do |agenda|
